@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab - Brave</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
+            bottom: -80px;
+            right: -80px;
+            animation-delay: 7s;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        /* Floating geometric shapes */
+        .shape {
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: rotate 30s linear infinite;
+        }
+
+        .shape1 {
+            width: 100px;
+            height: 100px;
+            top: 15%;
+            left: 10%;
+            border-radius: 20px;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            right: 15%;
+            border-radius: 50%;
+            animation-delay: 10s;
+        }
+
+        .shape3 {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            left: 85%;
+            transform: rotate(45deg);
+            animation-delay: 20s;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg) translateY(0);
+            }
+            to {
+                transform: rotate(360deg) translateY(-20px);
+            }
+        }
+
+        /* Subtle grid lines */
+        .grid-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridMove 40s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+
+        .container {
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 40px;
+        }
+
+        .greeting {
+            font-size: 18px;
+            color: #888888;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease;
+        }
+
+        .username {
+            font-size: 22px;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+            font-weight: 300;
+            animation: fadeIn 1.1s ease;
+        }
+
+        .clock {
+            font-size: 140px;
+            font-weight: 200;
+            color: #ffffff;
+            letter-spacing: -5px;
+            margin-bottom: 8px;
+            animation: fadeIn 1s ease;
+            text-shadow: 0 0 60px rgba(255, 255, 255, 0.1);
+        }
+
+        .date {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 60px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .search-container {
+            margin-bottom: 50px;
+            animation: fadeIn 1.2s ease;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 16px 24px;
+            font-size: 15px;
+            border: 1px solid #1a1a1a;
+            border-radius: 12px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-box::placeholder {
+            color: #444444;
+        }
+
+        .search-box:focus {
+            border-color: #2a2a2a;
+            background: rgba(30, 30, 30, 0.8);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+        }
+
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            animation: fadeIn 1.4s ease;
+            flex-wrap: wrap;
+        }
+
+        .link-item {
+            text-decoration: none;
+            color: #666666;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 8px 0;
+            position: relative;
+        }
+
+        .link-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            transition: width 0.3s ease;
+        }
+
+        .link-item:hover {
+            color: #ffffff;
+        }
+
+        .link-item:hover::after {
+            width: 100%;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Breathing dot */
+        .breath-dot {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 8px;
+            height: 8px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: breath 4s ease-in-out infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes breath {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .quick-links {
+                gap: 30px;
+            }
+
+            .clock {
+                font-size: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+
+    <div class="breath-dot"></div>
+
+    <div class="container">
+        <div class="greeting" id="greeting"></div>
+        <div class="username">Rizqy,~</div>
+        <div class="clock" id="clock"></div>
+        <div class="date" id="date"></div>
+
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search or type URL" id="searchBox">
+        </div>
+
+        <div class="quick-links">
+            <a href="https://www.youtube.com" class="link-item">YouTube</a>
+            <a href="https://www.google.com" class="link-item">Google</a>
+            <a href="https://www.speedtest.net" class="link-item">Speedtest</a>
+            <a href="https://www.netflix.com" class="link-item">Netflix</a>
+            <a href="https://idlix.net" class="link-item">Idlix</a>
+            <a href="https://www.rbtvplus08.com/id" class="link-item">Rbtv</a>
+        </div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', month: 'short', day: 'numeric' };
+            const dateStr = now.toLocaleDateString('en-US', options).toUpperCase();
+            document.getElementById('date').textContent = dateStr;
+        }
+
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            if (hour < 12) greeting = 'Good Morning';
+            else if (hour < 18) greeting = 'Good Afternoon';
+            else greeting = 'Good Evening';
+            document.getElementById('greeting').textContent = greeting;
+        }
+
+        document.getElementById('searchBox').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const query = this.value.trim();
+                if (query) {
+                    if (query.includes('.') && !query.includes(' ')) {
+                        window.location.href = query.startsWith('http') ? query : 'https://' + query;
+                    } else {
+                        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+                    }
+                }
+            }
+        });
+
+        updateClock();
+        updateDate();
+        updateGreeting();
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
