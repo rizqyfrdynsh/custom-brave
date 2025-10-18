@@ -123,6 +123,19 @@
             color: #888888;
             font-weight: 400;
             letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .weather {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 400;
+            margin-top: 8px;
+        }
+
+        .weather-loading {
+            color: #444444;
+            font-size: 13px;
         }
 
         /* Main Content - Center */
@@ -134,13 +147,13 @@
         }
 
         .greeting-small {
-            font-size: 18px;
+            font-size: 20px;
             color: #888888;
             margin-bottom: 20px;
             font-weight: 400;
             letter-spacing: 2px;
             animation: fadeIn 1s ease;
-            margin-top: -80px;
+            margin-top: -100px;
         }
 
         .main-greeting {
@@ -161,12 +174,15 @@
         .search-container {
             margin-bottom: 60px;
             animation: fadeIn 1.4s ease;
+            position: relative;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .search-box {
             width: 100%;
-            max-width: 700px;
-            padding: 20px 28px;
+            padding: 20px 60px 20px 28px;
             font-size: 17px;
             border: 1px solid #1a1a1a;
             border-radius: 16px;
@@ -175,6 +191,25 @@
             color: #ffffff;
             transition: all 0.3s ease;
             outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+        }
+
+        .search-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #666666;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
         }
 
         .search-box::placeholder {
@@ -193,6 +228,7 @@
             gap: 50px;
             animation: fadeIn 1.6s ease;
             flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
         .link-item {
@@ -224,6 +260,25 @@
 
         .link-item:hover::after {
             width: 100%;
+        }
+
+        /* Countdown Widget */
+        .countdown-container {
+            text-align: center;
+            animation: fadeIn 1.8s ease;
+            margin-top: 40px;
+        }
+
+        .countdown {
+            font-size: 17px;
+            color: #666666;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .countdown-number {
+            color: #888888;
+            font-weight: 600;
         }
 
         @keyframes fadeIn {
@@ -291,6 +346,9 @@
     <!-- Date - Top Right -->
     <div class="date-container">
         <div class="date" id="date"></div>
+        <div class="weather" id="weather">
+            <span class="weather-loading">Loading weather...</span>
+        </div>
     </div>
 
     <!-- Main Content - Center -->
@@ -302,6 +360,12 @@
 
         <div class="search-container">
             <input type="text" class="search-box" placeholder="Search everything here...." id="searchBox">
+            <span class="search-icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </span>
         </div>
 
         <div class="quick-links">
@@ -311,6 +375,10 @@
             <a href="https://www.netflix.com" class="link-item">Netflix</a>
             <a href="https://idlix.net" class="link-item">Idlix</a>
             <a href="https://www.rbtvplus08.com/id" class="link-item">Rbtv</a>
+        </div>
+
+        <div class="countdown-container">
+            <div class="countdown" id="countdown"></div>
         </div>
     </div>
 
@@ -344,6 +412,84 @@
             document.getElementById('mainGreeting').textContent = `Happy ${dayName}, Rizqy~`;
         }
 
+        async function updateWeather() {
+            try {
+                // Get location from IP
+                const locationRes = await fetch('https://ipapi.co/json/');
+                const locationData = await locationRes.json();
+                
+                const city = locationData.city;
+                const country = locationData.country_code;
+                
+                // Get weather data (using wttr.in - free, no API key needed)
+                const weatherRes = await fetch(`https://wttr.in/${city}?format=j1`);
+                const weatherData = await weatherRes.json();
+                
+                const temp = weatherData.current_condition[0].temp_C;
+                const desc = weatherData.current_condition[0].weatherDesc[0].value;
+                
+                // Weather emoji based on description
+                let emoji = '☀️';
+                const descLower = desc.toLowerCase();
+                if (descLower.includes('rain')) emoji = '🌧️';
+                else if (descLower.includes('cloud')) emoji = '☁️';
+                else if (descLower.includes('storm')) emoji = '⛈️';
+                else if (descLower.includes('snow')) emoji = '❄️';
+                else if (descLower.includes('mist') || descLower.includes('fog')) emoji = '🌫️';
+                else if (descLower.includes('clear') || descLower.includes('sunny')) emoji = '☀️';
+                
+                document.getElementById('weather').innerHTML = `${emoji} ${temp}°C · ${city}`;
+            } catch (error) {
+                console.error('Weather fetch error:', error);
+                document.getElementById('weather').innerHTML = '';
+            }
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const newYear2026 = new Date('2026-01-01T00:00:00');
+            const diff = newYear2026 - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            
+            document.getElementById('countdown').innerHTML = 
+                `🎆 <span class="countdown-number">${days}</span> days to 2026`;
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Focus search with /
+            if (e.key === '/' && document.activeElement !== document.getElementById('searchBox')) {
+                e.preventDefault();
+                document.getElementById('searchBox').focus();
+            }
+            
+            // Clear search with ESC
+            if (e.key === 'Escape') {
+                document.getElementById('searchBox').blur();
+                document.getElementById('searchBox').value = '';
+            }
+            
+            // Quick links with Alt + Number
+            if (e.altKey && !e.ctrlKey && !e.shiftKey) {
+                const links = [
+                    'https://www.youtube.com',      // Alt+1
+                    'https://www.google.com',        // Alt+2
+                    'https://www.speedtest.net',     // Alt+3
+                    'https://www.netflix.com',       // Alt+4
+                    'https://idlix.net',             // Alt+5
+                    'https://www.rbtvplus08.com/id'  // Alt+6
+                ];
+                
+                const num = parseInt(e.key);
+                if (num >= 1 && num <= 6) {
+                    e.preventDefault();
+                    window.location.href = links[num - 1];
+                }
+            }
+        });
+
         document.getElementById('searchBox').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 const query = this.value.trim();
@@ -360,7 +506,10 @@
         updateClock();
         updateDate();
         updateGreeting();
+        updateWeather();
+        updateCountdown();
         setInterval(updateClock, 1000);
+        setInterval(updateCountdown, 60000); // Update every minute
     </script>
 </body>
 </html>
