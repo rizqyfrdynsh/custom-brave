@@ -13,7 +13,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
             background: #000000;
             min-height: 100vh;
             display: flex;
@@ -22,7 +22,7 @@
             justify-content: center;
             color: #ffffff;
             position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
         /* Animated gradient orbs */
@@ -74,49 +74,6 @@
             }
         }
 
-        /* Floating geometric shapes */
-        .shape {
-            position: absolute;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            animation: rotate 30s linear infinite;
-        }
-
-        .shape1 {
-            width: 100px;
-            height: 100px;
-            top: 15%;
-            left: 10%;
-            border-radius: 20px;
-            animation-delay: 0s;
-        }
-
-        .shape2 {
-            width: 80px;
-            height: 80px;
-            bottom: 20%;
-            right: 15%;
-            border-radius: 50%;
-            animation-delay: 10s;
-        }
-
-        .shape3 {
-            width: 60px;
-            height: 60px;
-            top: 60%;
-            left: 85%;
-            transform: rotate(45deg);
-            animation-delay: 20s;
-        }
-
-        @keyframes rotate {
-            from {
-                transform: rotate(0deg) translateY(0);
-            }
-            to {
-                transform: rotate(360deg) translateY(-20px);
-            }
-        }
-
         /* Subtle grid lines */
         .grid-overlay {
             position: absolute;
@@ -134,6 +91,41 @@
             100% { transform: translate(80px, 80px); }
         }
 
+        /* Clock - Top Left */
+        .clock-container {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            z-index: 10;
+            animation: fadeIn 1s ease;
+        }
+
+        .clock {
+            font-size: 32px;
+            font-weight: 300;
+            color: #ffffff;
+            letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* Date - Top Right */
+        .date-container {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 10;
+            animation: fadeIn 1s ease;
+            text-align: right;
+        }
+
+        .date {
+            font-size: 16px;
+            color: #888888;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* Main Content - Center */
         .container {
             z-index: 10;
             text-align: center;
@@ -141,55 +133,43 @@
             padding: 40px;
         }
 
-        .greeting {
+        .greeting-small {
             font-size: 18px;
             color: #888888;
-            margin-bottom: 10px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            animation: fadeIn 1s ease;
-        }
-
-        .username {
-            font-size: 22px;
-            color: #aaaaaa;
             margin-bottom: 20px;
-            font-weight: 300;
-            animation: fadeIn 1.1s ease;
-        }
-
-        .clock {
-            font-size: 140px;
-            font-weight: 200;
-            color: #ffffff;
-            letter-spacing: -5px;
-            margin-bottom: 8px;
-            animation: fadeIn 1s ease;
-            text-shadow: 0 0 60px rgba(255, 255, 255, 0.1);
-        }
-
-        .date {
-            font-size: 16px;
-            color: #555555;
-            margin-bottom: 60px;
             font-weight: 400;
             letter-spacing: 2px;
+            animation: fadeIn 1s ease;
+            margin-top: -80px;
+        }
+
+        .main-greeting {
+            font-size: 48px;
+            font-weight: 300;
+            color: #ffffff;
+            margin-bottom: 60px;
             animation: fadeIn 1.2s ease;
+            line-height: 1.4;
+        }
+
+        .emoji {
+            font-size: 48px;
+            margin-right: 10px;
+            display: none;
         }
 
         .search-container {
-            margin-bottom: 50px;
-            animation: fadeIn 1.2s ease;
+            margin-bottom: 60px;
+            animation: fadeIn 1.4s ease;
         }
 
         .search-box {
             width: 100%;
-            max-width: 500px;
-            padding: 16px 24px;
-            font-size: 15px;
+            max-width: 700px;
+            padding: 20px 28px;
+            font-size: 17px;
             border: 1px solid #1a1a1a;
-            border-radius: 12px;
+            border-radius: 16px;
             background: rgba(20, 20, 20, 0.6);
             backdrop-filter: blur(20px);
             color: #ffffff;
@@ -198,11 +178,11 @@
         }
 
         .search-box::placeholder {
-            color: #444444;
+            color: #555555;
         }
 
         .search-box:focus {
-            border-color: #2a2a2a;
+            border-color: #333333;
             background: rgba(30, 30, 30, 0.8);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
         }
@@ -211,7 +191,7 @@
             display: flex;
             justify-content: center;
             gap: 50px;
-            animation: fadeIn 1.4s ease;
+            animation: fadeIn 1.6s ease;
             flex-wrap: wrap;
         }
 
@@ -257,37 +237,41 @@
             }
         }
 
-        /* Breathing dot */
-        .breath-dot {
-            position: fixed;
-            top: 40px;
-            right: 40px;
-            width: 8px;
-            height: 8px;
-            background: #ffffff;
-            border-radius: 50%;
-            animation: breath 4s ease-in-out infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes breath {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.3;
-            }
-            50% {
-                transform: scale(1.5);
-                opacity: 0.6;
-            }
-        }
-
         @media (max-width: 768px) {
-            .quick-links {
-                gap: 30px;
+            .clock-container {
+                top: 20px;
+                left: 20px;
+            }
+
+            .date-container {
+                top: 20px;
+                right: 20px;
             }
 
             .clock {
-                font-size: 100px;
+                font-size: 24px;
+            }
+
+            .date {
+                font-size: 13px;
+            }
+
+            .main-greeting {
+                font-size: 32px;
+            }
+
+            .emoji {
+                font-size: 32px;
+            }
+
+            .search-box {
+                max-width: 90%;
+                padding: 16px 20px;
+                font-size: 15px;
+            }
+
+            .quick-links {
+                gap: 30px;
             }
         }
     </style>
@@ -299,20 +283,25 @@
     <div class="orb orb2"></div>
     <div class="orb orb3"></div>
 
-    <div class="shape shape1"></div>
-    <div class="shape shape2"></div>
-    <div class="shape shape3"></div>
-
-    <div class="breath-dot"></div>
-
-    <div class="container">
-        <div class="greeting" id="greeting"></div>
-        <div class="username">Rizqy,~</div>
+    <!-- Clock - Top Left -->
+    <div class="clock-container">
         <div class="clock" id="clock"></div>
+    </div>
+
+    <!-- Date - Top Right -->
+    <div class="date-container">
         <div class="date" id="date"></div>
+    </div>
+
+    <!-- Main Content - Center -->
+    <div class="container">
+        <div class="greeting-small" id="greetingSmall"></div>
+        <div class="main-greeting">
+            <span id="mainGreeting"></span>
+        </div>
 
         <div class="search-container">
-            <input type="text" class="search-box" placeholder="Search or type URL" id="searchBox">
+            <input type="text" class="search-box" placeholder="Search everything here...." id="searchBox">
         </div>
 
         <div class="quick-links">
@@ -341,12 +330,18 @@
         }
 
         function updateGreeting() {
-            const hour = new Date().getHours();
+            const now = new Date();
+            const hour = now.getHours();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const dayName = days[now.getDay()];
+            
             let greeting = '';
             if (hour < 12) greeting = 'Good Morning';
             else if (hour < 18) greeting = 'Good Afternoon';
             else greeting = 'Good Evening';
-            document.getElementById('greeting').textContent = greeting;
+            
+            document.getElementById('greetingSmall').textContent = greeting;
+            document.getElementById('mainGreeting').textContent = `Happy ${dayName}, Rizqy~`;
         }
 
         document.getElementById('searchBox').addEventListener('keypress', function(e) {
