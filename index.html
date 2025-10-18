@@ -223,43 +223,33 @@
         }
 
         .quick-links {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto 40px auto;
             animation: fadeIn 1.6s ease;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
         }
 
         .link-item {
             text-decoration: none;
-            color: #666666;
+            color: #888888;
             transition: all 0.3s ease;
             cursor: pointer;
             font-size: 15px;
             font-weight: 500;
             letter-spacing: 0.5px;
-            padding: 8px 0;
-            position: relative;
-        }
-
-        .link-item::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: linear-gradient(90deg, #6366f1, #a855f7);
-            transition: width 0.3s ease;
+            padding: 16px 24px;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            background: transparent;
+            text-align: center;
         }
 
         .link-item:hover {
             color: #ffffff;
-        }
-
-        .link-item:hover::after {
-            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #555555;
         }
 
         /* Countdown Widget */
@@ -315,10 +305,6 @@
                 font-size: 32px;
             }
 
-            .emoji {
-                font-size: 32px;
-            }
-
             .search-box {
                 max-width: 90%;
                 padding: 16px 20px;
@@ -326,7 +312,8 @@
             }
 
             .quick-links {
-                gap: 30px;
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 90%;
             }
         }
     </style>
