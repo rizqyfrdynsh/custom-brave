@@ -14,7 +14,9 @@
 
         body {
             font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
-            background: #111111;
+            background: linear-gradient(-45deg, #0a0a0a, #0f0f12, #111111, #0d0d15);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -23,6 +25,18 @@
             color: #ffffff;
             position: relative;
             overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* Animated gradient orbs */
