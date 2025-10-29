@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome, Rizqy~</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22white%22/></svg>">
+    <title>NetSpeed ISP - Internet Cepat & Terpercaya</title>
     <style>
         * {
             margin: 0;
@@ -13,504 +12,416 @@
         }
 
         body {
-            font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
-            background: linear-gradient(-45deg, #0a0a0a, #0f0f12, #111111, #0d0d15);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            position: relative;
-            overflow: hidden;
+            padding: 0 20px;
         }
 
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
         }
 
-        /* Animated gradient orbs */
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
         }
 
-        .orb1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
-            top: -100px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb2 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%);
-            bottom: -80px;
-            right: -80px;
-            animation-delay: 7s;
-        }
-
-        .orb3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.3) 0%, transparent 70%);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation-delay: 14s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-        }
-
-        /* Subtle grid lines */
-        .grid-overlay {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-            background-size: 80px 80px;
-            animation: gridMove 40s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(80px, 80px); }
-        }
-
-        /* Clock - Top Left */
-        .clock-container {
-            position: fixed;
-            top: 40px;
-            left: 40px;
-            z-index: 10;
-            animation: fadeIn 1s ease;
-        }
-
-        .clock {
-            font-size: 32px;
-            font-weight: 300;
-            color: #ffffff;
-            letter-spacing: 1px;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        /* Date - Top Right */
-        .date-container {
-            position: fixed;
-            top: 40px;
-            right: 40px;
-            z-index: 10;
-            animation: fadeIn 1s ease;
-            text-align: right;
-        }
-
-        .date {
-            font-size: 16px;
-            color: #888888;
-            font-weight: 400;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .weather {
-            font-size: 14px;
-            color: #666666;
-            font-weight: 400;
-            margin-top: 8px;
-        }
-
-        .weather-loading {
-            color: #444444;
-            font-size: 13px;
-        }
-
-        /* Main Content - Center */
-        .container {
-            z-index: 10;
-            text-align: center;
-            max-width: 900px;
-            padding: 40px;
-        }
-
-        .greeting-small {
-            font-size: 20px;
-            color: #888888;
-            margin-bottom: 20px;
-            font-weight: 400;
-            letter-spacing: 2px;
-            animation: fadeIn 1s ease;
-            margin-top: -100px;
-        }
-
-        .main-greeting {
-            font-size: 48px;
-            font-weight: 300;
-            color: #ffffff;
-            margin-bottom: 60px;
-            animation: fadeIn 1.2s ease;
-            line-height: 1.4;
-        }
-
-        .emoji {
-            font-size: 48px;
-            margin-right: 10px;
-            display: none;
-        }
-
-        .search-container {
-            margin-bottom: 60px;
-            animation: fadeIn 1.4s ease;
-            position: relative;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .search-box {
-            width: 100%;
-            padding: 20px 60px 20px 28px;
-            font-size: 17px;
-            border: 1px solid #1a1a1a;
-            border-radius: 16px;
-            background: rgba(20, 20, 20, 0.6);
-            backdrop-filter: blur(20px);
-            color: #ffffff;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 24px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            pointer-events: none;
-        }
-
-        .search-icon svg {
-            width: 100%;
-            height: 100%;
-            stroke: #666666;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-        }
-
-        .search-box::placeholder {
-            color: #555555;
-        }
-
-        .search-box:focus {
-            border-color: #333333;
-            background: rgba(30, 30, 30, 0.8);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-        }
-
-        .quick-links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            animation: fadeIn 1.6s ease;
-        }
-
-        .link-item {
+        .nav-links a {
+            color: white;
             text-decoration: none;
-            color: #888888;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            padding: 16px 24px;
-            border: 1px solid #333333;
-            border-radius: 12px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
             background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Pricing Plans */
+        .pricing-section {
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
             text-align: center;
         }
 
-        .link-item:hover {
-            color: #ffffff;
-            background: rgba(255, 255, 255, 0.05);
-            border-color: #555555;
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
-        /* Countdown Widget */
-        .countdown-container {
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+            position: relative;
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-period {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-features li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .btn-plan {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-plan:hover {
+            background: #5568d3;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
             text-align: center;
-            animation: fadeIn 1.8s ease;
-            margin-top: 120px;
+            padding: 2rem;
         }
 
-        .countdown {
-            font-size: 17px;
-            color: #666666;
-            font-weight: 400;
-            letter-spacing: 1px;
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .countdown-number {
-            color: #888888;
-            font-weight: 600;
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: #667eea;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .clock-container {
-                top: 20px;
-                left: 20px;
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
             }
 
-            .date-container {
-                top: 20px;
-                right: 20px;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .clock {
-                font-size: 24px;
+            .hero p {
+                font-size: 1rem;
             }
 
-            .date {
-                font-size: 13px;
-            }
-
-            .main-greeting {
-                font-size: 32px;
-            }
-
-            .search-box {
-                max-width: 90%;
-                padding: 16px 20px;
-                font-size: 15px;
-            }
-
-            .quick-links {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 90%;
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="grid-overlay"></div>
-    
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">NetSpeed ISP</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="paket.html">Paket</a></li>
+                <li><a href="portal.html">Portal</a></li>
+                <li><a href="tagihan.html">Tagihan</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Clock - Top Left -->
-    <div class="clock-container">
-        <div class="clock" id="clock"></div>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Internet Cepat & Stabil</h1>
+        <p>Nikmati koneksi internet fiber optik dengan kecepatan hingga 100 Mbps</p>
+        <a href="paket.html" class="btn">Lihat Paket</a>
+        <a href="portal.html" class="btn btn-secondary">Login Portal</a>
+    </section>
 
-    <!-- Date - Top Right -->
-    <div class="date-container">
-        <div class="date" id="date"></div>
-        <div class="weather" id="weather">
-            <span class="weather-loading">Loading weather...</span>
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Paket Internet Kami</h2>
+            <p class="section-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3 class="plan-name">Paket Basic</h3>
+                    <div class="plan-price">Rp 250.000</div>
+                    <div class="plan-period">per bulan</div>
+                    <ul class="plan-features">
+                        <li>Kecepatan 20 Mbps</li>
+                        <li>Unlimited Kuota</li>
+                        <li>Free Instalasi</li>
+                        <li>Support 24/7</li>
+                    </ul>
+                    <a href="paket.html" class="btn-plan">Pilih Paket</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <span class="featured-badge">POPULER</span>
+                    <h3 class="plan-name">Paket Premium</h3>
+                    <div class="plan-price">Rp 450.000</div>
+                    <div class="plan-period">per bulan</div>
+                    <ul class="plan-features">
+                        <li>Kecepatan 50 Mbps</li>
+                        <li>Unlimited Kuota</li>
+                        <li>Free Instalasi</li>
+                        <li>Support 24/7</li>
+                        <li>Free Router</li>
+                    </ul>
+                    <a href="paket.html" class="btn-plan">Pilih Paket</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="plan-name">Paket Ultimate</h3>
+                    <div class="plan-price">Rp 750.000</div>
+                    <div class="plan-period">per bulan</div>
+                    <ul class="plan-features">
+                        <li>Kecepatan 100 Mbps</li>
+                        <li>Unlimited Kuota</li>
+                        <li>Free Instalasi</li>
+                        <li>Priority Support</li>
+                        <li>Free Router Premium</li>
+                        <li>Static IP</li>
+                    </ul>
+                    <a href="paket.html" class="btn-plan">Pilih Paket</a>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Main Content - Center -->
-    <div class="container">
-        <div class="greeting-small" id="greetingSmall"></div>
-        <div class="main-greeting">
-            <span id="mainGreeting"></span>
+    <!-- Features Section -->
+    <section class="container">
+        <h2 class="section-title">Mengapa Memilih Kami?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Koneksi Super Cepat</h3>
+                <p>Fiber optik dengan kecepatan hingga 100 Mbps untuk semua kebutuhan online Anda</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Aman & Terpercaya</h3>
+                <p>Koneksi yang aman dengan enkripsi untuk melindungi data pribadi Anda</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Support 24/7</h3>
+                <p>Tim support kami siap membantu Anda kapan saja, 24 jam sehari</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Harga Terjangkau</h3>
+                <p>Paket internet dengan harga kompetitif dan tidak ada biaya tersembunyi</p>
+            </div>
         </div>
+    </section>
 
-        <div class="search-container">
-            <input type="text" class="search-box" placeholder="What are you looking for?" id="searchBox">
-            <span class="search-icon">
-                <svg viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
-            </span>
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <div class="contact-info">
+                <div class="contact-card">
+                    <h3>📞 Telepon</h3>
+                    <p>+62 821 xxxx xxxx</p>
+                </div>
+                <div class="contact-card">
+                    <h3>📧 Email</h3>
+                    <p>info@netspeed.com</p>
+                </div>
+                <div class="contact-card">
+                    <h3>📍 Alamat</h3>
+                    <p>Jl. Teknologi No. 123<br>Jakarta, Indonesia</p>
+                </div>
+                <div class="contact-card">
+                    <h3>⏰ Jam Operasional</h3>
+                    <p>Senin - Sabtu<br>08:00 - 20:00 WIB</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="quick-links">
-            <a href="https://www.youtube.com" class="link-item">YouTube</a>
-            <a href="https://www.google.com" class="link-item">Google</a>
-            <a href="https://www.speedtest.net" class="link-item">Speedtest</a>
-            <a href="https://www.netflix.com" class="link-item">Netflix</a>
-            <a href="https://idlix.net" class="link-item">Idlix</a>
-            <a href="https://www.rbtvplus08.com/id" class="link-item">Rbtv</a>
-        </div>
-
-        <div class="countdown-container">
-            <div class="countdown" id="countdown"></div>
-        </div>
-    </div>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}`;
-        }
-
-        function updateDate() {
-            const now = new Date();
-            const options = { weekday: 'long', month: 'short', day: 'numeric' };
-            const dateStr = now.toLocaleDateString('en-US', options).toUpperCase();
-            document.getElementById('date').textContent = dateStr;
-        }
-
-        function updateGreeting() {
-            const now = new Date();
-            const hour = now.getHours();
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const dayName = days[now.getDay()];
-            
-            let greeting = '';
-            if (hour < 12) greeting = 'Good Morning';
-            else if (hour < 18) greeting = 'Good Afternoon';
-            else greeting = 'Good Evening';
-            
-            document.getElementById('greetingSmall').textContent = greeting;
-            document.getElementById('mainGreeting').textContent = `Happy ${dayName}, Rizqy~`;
-        }
-
-        async function updateWeather() {
-            try {
-                // Get location from IP
-                const locationRes = await fetch('https://ipapi.co/json/');
-                const locationData = await locationRes.json();
-                
-                const city = locationData.city;
-                const country = locationData.country_code;
-                
-                // Get weather data (using wttr.in - free, no API key needed)
-                const weatherRes = await fetch(`https://wttr.in/${city}?format=j1`);
-                const weatherData = await weatherRes.json();
-                
-                const temp = weatherData.current_condition[0].temp_C;
-                const desc = weatherData.current_condition[0].weatherDesc[0].value;
-                
-                // Weather emoji based on description
-                let emoji = '☀️';
-                const descLower = desc.toLowerCase();
-                if (descLower.includes('rain')) emoji = '🌧️';
-                else if (descLower.includes('cloud')) emoji = '☁️';
-                else if (descLower.includes('storm')) emoji = '⛈️';
-                else if (descLower.includes('snow')) emoji = '❄️';
-                else if (descLower.includes('mist') || descLower.includes('fog')) emoji = '🌫️';
-                else if (descLower.includes('clear') || descLower.includes('sunny')) emoji = '☀️';
-                
-                document.getElementById('weather').innerHTML = `${emoji} ${temp}°C · ${city}`;
-            } catch (error) {
-                console.error('Weather fetch error:', error);
-                document.getElementById('weather').innerHTML = '';
-            }
-        }
-
-        function updateCountdown() {
-            const now = new Date();
-            const newYear2026 = new Date('2026-01-01T00:00:00');
-            const diff = newYear2026 - now;
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            
-            document.getElementById('countdown').innerHTML = 
-                `🎆 <span class="countdown-number">${days}</span> days to 2026`;
-        }
-
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
-            // Focus search with /
-            if (e.key === '/' && document.activeElement !== document.getElementById('searchBox')) {
-                e.preventDefault();
-                document.getElementById('searchBox').focus();
-            }
-            
-            // Clear search with ESC
-            if (e.key === 'Escape') {
-                document.getElementById('searchBox').blur();
-                document.getElementById('searchBox').value = '';
-            }
-            
-            // Quick links with Alt + Number
-            if (e.altKey && !e.ctrlKey && !e.shiftKey) {
-                const links = [
-                    'https://www.youtube.com',      // Alt+1
-                    'https://www.google.com',        // Alt+2
-                    'https://www.speedtest.net',     // Alt+3
-                    'https://www.netflix.com',       // Alt+4
-                    'https://idlix.net',             // Alt+5
-                    'https://www.rbtvplus08.com/id'  // Alt+6
-                ];
-                
-                const num = parseInt(e.key);
-                if (num >= 1 && num <= 6) {
-                    e.preventDefault();
-                    window.location.href = links[num - 1];
-                }
-            }
-        });
-
-        document.getElementById('searchBox').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const query = this.value.trim();
-                if (query) {
-                    if (query.includes('.') && !query.includes(' ')) {
-                        window.location.href = query.startsWith('http') ? query : 'https://' + query;
-                    } else {
-                        window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-                    }
-                }
-            }
-        });
-
-        updateClock();
-        updateDate();
-        updateGreeting();
-        updateWeather();
-        updateCountdown();
-        setInterval(updateClock, 1000);
-        setInterval(updateCountdown, 60000); // Update every minute
-    </script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 NetSpeed ISP. All rights reserved.</p>
+    </footer>
 </body>
 </html>

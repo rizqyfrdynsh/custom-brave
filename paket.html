@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Internet - NetSpeed ISP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .plan-period {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .plan-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1rem;
+        }
+
+        .plan-features li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .btn-plan {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-plan:hover {
+            background: #5568d3;
+        }
+
+        .comparison-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .comparison-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #667eea;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .comparison-table thead {
+            background: #667eea;
+            color: white;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .check {
+            color: #28a745;
+            font-size: 1.5rem;
+        }
+
+        .cross {
+            color: #dc3545;
+            font-size: 1.5rem;
+        }
+
+        .faq-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #667eea;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">NetSpeed ISP</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="paket.html">Paket</a></li>
+                <li><a href="portal.html">Portal</a></li>
+                <li><a href="tagihan.html">Tagihan</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="page-header">
+            <h1>Paket Internet Kami</h1>
+            <p>Pilih paket yang sesuai dengan kebutuhan internet Anda</p>
+        </div>
+
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3 class="plan-name">Paket Basic</h3>
+                <div class="plan-price">Rp 250K</div>
+                <div class="plan-period">per bulan</div>
+                <ul class="plan-features">
+                    <li>Kecepatan 20 Mbps</li>
+                    <li>Unlimited Kuota</li>
+                    <li>Free Instalasi</li>
+                    <li>Support 24/7</li>
+                    <li>1 Perangkat Router</li>
+                    <li>Garansi 30 Hari</li>
+                </ul>
+                <button class="btn-plan" onclick="orderPackage('Basic')">Pesan Sekarang</button>
+            </div>
+
+            <div class="pricing-card featured">
+                <span class="featured-badge">PALING POPULER</span>
+                <h3 class="plan-name">Paket Premium</h3>
+                <div class="plan-price">Rp 450K</div>
+                <div class="plan-period">per bulan</div>
+                <ul class="plan-features">
+                    <li>Kecepatan 50 Mbps</li>
+                    <li>Unlimited Kuota</li>
+                    <li>Free Instalasi</li>
+                    <li>Priority Support 24/7</li>
+                    <li>Free Router AC</li>
+                    <li>Garansi 60 Hari</li>
+                    <li>Free Extender WiFi</li>
+                </ul>
+                <button class="btn-plan" onclick="orderPackage('Premium')">Pesan Sekarang</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="plan-name">Paket Ultimate</h3>
+                <div class="plan-price">Rp 750K</div>
+                <div class="plan-period">per bulan</div>
+                <ul class="plan-features">
+                    <li>Kecepatan 100 Mbps</li>
+                    <li>Unlimited Kuota</li>
+                    <li>Free Instalasi</li>
+                    <li>VIP Support 24/7</li>
+                    <li>Free Router Premium</li>
+                    <li>Garansi 90 Hari</li>
+                    <li>Static IP Address</li>
+                    <li>Free Mesh WiFi System</li>
+                </ul>
+                <button class="btn-plan" onclick="orderPackage('Ultimate')">Pesan Sekarang</button>
+            </div>
+        </div>
+
+        <div class="comparison-section">
+            <h2>Perbandingan Paket</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Fitur</th>
+                        <th>Basic</th>
+                        <th>Premium</th>
+                        <th>Ultimate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kecepatan</td>
+                        <td>20 Mbps</td>
+                        <td>50 Mbps</td>
+                        <td>100 Mbps</td>
+                    </tr>
+                    <tr>
+                        <td>Kuota</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                        <td>Unlimited</td>
+                    </tr>
+                    <tr>
+                        <td>Free Instalasi</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Support 24/7</td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Free Router</td>
+                        <td>Standard</td>
+                        <td>AC Router</td>
+                        <td>Premium Router</td>
+                    </tr>
+                    <tr>
+                        <td>WiFi Extender</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Static IP</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mesh WiFi</td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="cross">✗</span></td>
+                        <td><span class="check">✓</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="faq-section">
+            <h2>Pertanyaan Umum (FAQ)</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Berapa lama waktu instalasi?</div>
+                <div class="faq-answer">Waktu instalasi biasanya 1-3 hari kerja setelah pembayaran dikonfirmasi, tergantung ketersediaan teknisi di area Anda.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Apakah ada biaya instalasi?</div>
+                <div class="faq-answer">Tidak, semua paket kami sudah termasuk gratis instalasi. Tidak ada biaya tersembunyi.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Bagaimana cara pembayaran?</div>
+                <div class="faq-answer">Kami menerima pembayaran melalui transfer bank, e-wallet (GoPay, OVO, DANA), dan virtual account.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Apakah bisa upgrade atau downgrade paket?</div>
+                <div class="faq-answer">Ya, Anda dapat mengubah paket kapan saja. Untuk upgrade dapat dilakukan segera, sedangkan downgrade berlaku di periode billing berikutnya.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Apakah ada kontrak minimal?</div>
+                <div class="faq-answer">Tidak ada kontrak minimal. Anda dapat berhenti berlangganan kapan saja dengan memberitahu kami 1 bulan sebelumnya.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Bagaimana jika ada gangguan?</div>
+                <div class="faq-answer">Tim support kami siap 24/7 untuk menangani keluhan dan gangguan. Anda dapat menghubungi kami melalui WhatsApp, telepon, atau portal pelanggan.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 NetSpeed ISP. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function orderPackage(packageName) {
+            alert('Terima kasih atas minat Anda pada Paket ' + packageName + '!\n\nUntuk melanjutkan pemesanan, silakan hubungi:\n\nWhatsApp: +62 821 xxxx xxxx\nEmail: sales@netspeed.com\n\nAtau kunjungi kantor kami di:\nJl. Teknologi No. 123, Jakarta');
+        }
+    </script>
+</body>
+</html>
